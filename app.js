@@ -1,8 +1,8 @@
 var fs = require('fs');
 var zlib = require("zlib");
+var that = this;
 
 zlib.unzip(fs.readFileSync(__dirname + '/data/world-cities.json.gz'), function(err, result){
-    var that = this;
     that.locations = JSON.parse(result.toString());
 });
 
@@ -24,10 +24,10 @@ var haversine = function(lat1, lon1, lat2, lon2)
 
 exports.zip_lookup = function(zip)
 {
-   for (var i = 0; i < this.locations.length; i++)
+   for (var i = 0; i < that.locations.length; i++)
    {
-      if (this.locations[i].postalCode == zip)
-         return this.locations[i];
+      if (that.locations[i].postalCode == zip)
+         return that.locations[i];
    }
 
    return null;
@@ -38,13 +38,13 @@ exports.gps_lookup = function(lat, lng)
    var min_distance = 9999999999; // simulate infinity
    var min_location = {};
    
-   for (var i = 0; i < this.locations.length; i++)
+   for (var i = 0; i < that.locations.length; i++)
    {
-      var distance = haversine(lat, lng, this.locations[i].latitude, this.locations[i].longitude);
+      var distance = haversine(lat, lng, that.locations[i].latitude, that.locations[i].longitude);
 
       if (distance < min_distance)
       {
-         min_location = this.locations[i];
+         min_location = that.locations[i];
          min_distance = distance;
       }
    }
