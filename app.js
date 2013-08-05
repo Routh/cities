@@ -1,7 +1,7 @@
 var fs = require('fs');
 var zlib = require("zlib");
 
-var gunzip = zlib.createGunzip(fs.readFileSync(__dirname + '/data/world-cities.json.gz'));
+var gunzip = zlib.inflate(fs.readFileSync(__dirname + '/data/world-cities.json.gz'));
 var locations = JSON.parse(gunzip);
 
 var R = 6371;
