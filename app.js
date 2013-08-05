@@ -1,5 +1,5 @@
 var fs = require('fs');
-var locations = JSON.parse(fs.readFileSync(__dirname + '/locations.json', 'ascii'));
+var locations = JSON.parse(fs.readFileSync(__dirname + '/data/world-cities.json', 'ascii'));
 
 var R = 6371;
 var haversine = function(lat1, lon1, lat2, lon2)
@@ -21,7 +21,7 @@ exports.zip_lookup = function(zip)
 {
    for (var i = 0; i < locations.length; i++)
    {
-      if (locations[i].zipcode == zip)
+      if (locations[i].postalCode == zip)
          return locations[i];
    }
 
