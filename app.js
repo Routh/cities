@@ -2,7 +2,9 @@ var fs = require('fs');
 var zlib = require("zlib");
 
 var gunzip = zlib.Unzip(fs.readFileSync(__dirname + '/data/world-cities.json.gz'));
-var locations = JSON.parse(gunzip);
+//var locations = JSON.parse(gunzip);
+console.log(gunzip);
+
 
 var R = 6371;
 var haversine = function(lat1, lon1, lat2, lon2)
