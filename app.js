@@ -37,18 +37,24 @@ exports.gps_lookup = function(lat, lng)
 {
    var min_distance = 9999999999; // simulate infinity
    var min_location = {};
-   
-   for (var i = 0; i < that.locations.length; i++)
-   {
-      var distance = haversine(lat, lng, that.locations[i].latitude, that.locations[i].longitude);
 
-      if (distance < min_distance)
-      {
-         min_location = that.locations[i];
-         min_distance = distance;
-      }
+   if (that.locations) {
+       for (var i = 0; i < that.locations.length; i++)
+       {
+           var distance = haversine(lat, lng, that.locations[i].latitude, that.locations[i].longitude);
+
+           if (distance < min_distance)
+           {
+               min_location = that.locations[i];
+               min_distance = distance;
+           }
+       }
+
+       min_location.distance = min_distance;
+       return min_location;
+   } else {
+       console.log("Something went wrong, locations were not defined.");
+       return false;
    }
 
-   min_location.distance = min_distance;
-   return min_location;
 };
